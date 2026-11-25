@@ -22,6 +22,8 @@ Spec (all strings UTF-8; omit a section to skip it):
 import json, sys
 from pathlib import Path
 
+from reportlab import rl_config
+rl_config.useA85 = 0  # binary image streams: ~20% smaller PDFs
 from reportlab.lib.enums import TA_JUSTIFY
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import ParagraphStyle
