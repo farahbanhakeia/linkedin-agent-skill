@@ -15,7 +15,7 @@ Shared data lives in `~/Documents/candidature/`: `profil-maitre.md` (source of t
 1. **Profile check** (first for any on-ramp that leads to a CV, a message or a send) — `profil-maitre.md` missing → stop and ask for a CV to build it. `⚠️ À CONFIRMER` lines → list them and ask the user to confirm in chat; unconfirmed or user away → proceed, those facts are off limits for this run.
 2. **`/job-offer-finder`** — verified shortlist, tracked offers excluded. Stop and let the user pick which offers to pursue (away → top 3).
 3. **`/application-tracker` `check`** — run it before any work on each chosen offer, even one the finder returned. Exit 2 → skip it. Exit 6 (already `préparée`) → go to step 6 with the existing CV and message, or redo 4–5 if the user wants them refreshed.
-4. **`/ats-cv-tailor`** — one tailored one-page PDF + gap report per offer. No one-page PDF after its cuts → stop, show the gap report, ask the user before continuing.
+4. **`/ats-cv-tailor`** — one tailored one-page PDF + gap report per offer. No one-page PDF after its cuts → stop, show the gap report, ask the user before continuing. Then **`/cover-letter-writer`** — the one-page lettre de motivation PDF, reusing the tailor's keywords and gap report.
 5. **`/recruiter-message-writer`** — the message for the offer's channel, with its count. Over the channel limit → have the writer shorten it before step 6; still over → ask the user which lines to cut.
 6. **Decision point** — show CV path, gap report, and message; the user validates or asks for edits. No validation, no sending.
 7. **`/submit-application`** — sends through the channel after the explicit yes, then logs `envoyée` (`add`, or `update --id` when the entry was `préparée`).
@@ -23,7 +23,7 @@ Shared data lives in `~/Documents/candidature/`: `profil-maitre.md` (source of t
 ## On-ramps
 
 - The user pastes an offer URL or text → step 1, then fetch it (`WebFetch`, or Claude in Chrome `get_page_text` for LinkedIn), save it to `offres/` with the `/job-offer-finder` offer-file template, then step 3.
-- The user already has a CV for the offer → steps 1, 3, then 5.
+- The user already has a CV for the offer → steps 1, 3, then the letter in 4 and step 5.
 - CV and message already prepared (a `job-hunt-batch` lot, statut `préparée` in the tracker) → steps 1, 3 (expect exit 6), then 6.
 - "Où j'en suis ?", "j'ai relancé", "entretien / refus chez X" → `/application-tracker` `list` to get the id, then `update --id <id> --statut relance|entretien|refus|offre`.
 

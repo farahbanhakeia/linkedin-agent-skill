@@ -16,6 +16,7 @@ Required, all four:
 - **Offer file** in `~/Documents/candidature/offres/` (or URL + company + title) with its `Canal de candidature` line.
 - **CV PDF** under `~/Documents/candidature/cv/` (from the `/ats-cv-tailor` skill); confirm it exists with `Glob`.
 - **Message** text (from the `/recruiter-message-writer` skill), in context or in the `.message.txt` file next to the CV.
+- **Lettre de motivation** PDF (`<slug>.lettre.pdf`, from the `/cover-letter-writer` skill) when one was prepared: attached with the CV on e-mail and on forms that accept a second file; Easy Apply usually takes one file, so the CV goes there and the letter is noted as "non jointe (un seul fichier accepté)".
 - **Master profile**: `Read` `~/Documents/candidature/profil-maitre.md`. It is the only source for form answers (phone, e-mail, city, years of experience). `⚠️ À CONFIRMER` fields are unknowns.
 
 Missing one → run the corresponding skill first, or ask. Do not improvise a CV or message here. If the CV and message have not been shown in this conversation yet (new conversation after a batch), show them now.
@@ -41,6 +42,7 @@ Show this block, alone in its message, and wait:
 - Offre : <Poste> — <Entreprise> (<lien>)
 - Canal : <easy_apply | email:<adresse> | formulaire:<url>>
 - CV : `<chemin du PDF>`
+- Lettre : `<chemin du PDF de la lettre | aucune>` — <jointe | non jointe (un seul fichier accepté)>
 - Message : <les 2 premières lignes…> — <sera collé dans le formulaire | envoyé par e-mail | à envoyer à la main au recruteur>
 
 Envoyer maintenant ? (oui / non)

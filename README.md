@@ -10,6 +10,7 @@ Tout ce que les skills écrivent (CV, messages, profil) vient d'un seul fichier 
 | --- | --- | --- |
 | `job-offer-finder` | Trouve des offres récentes et ouvertes (0–3 ans, CDI/CDD/stage pré-embauche, Maroc/France/télétravail), ouvre et vérifie chacune, exclut celles déjà dans le suivi, enregistre le texte dans `offres/` | « cherche des offres », « find junior data jobs » |
 | `ats-cv-tailor` | Génère un CV PDF d'une page, compatible ATS, adapté à une offre, avec un rapport des compétences manquantes | « adapte mon CV à cette offre » |
+| `cover-letter-writer` | Lettre de motivation d'une page en PDF : chaque paragraphe répond à une exigence de l'offre avec une preuve du profil | « lettre de motivation pour cette offre » |
 | `recruiter-message-writer` | Note d'invitation, message LinkedIn, e-mail de candidature ou relance, deux preuves concrètes puis la demande d'entretien | « écris un message au recruteur » |
 | `submit-application` | Envoie (Easy Apply, e-mail, formulaire) uniquement après un « oui » explicite pour cette offre, puis enregistre dans le suivi | « postule », « envoie la candidature » |
 | `application-tracker` | Ajoute, met à jour, vérifie les doublons et liste le tableau de suivi (`suivi-candidatures.csv`) | « est-ce que j'ai déjà postulé chez … ? », « marque en entretien » |
@@ -75,6 +76,7 @@ Pour LinkedIn (Jobs, Easy Apply, lecture du profil), les skills utilisent Claude
 skills/<nom-du-skill>/SKILL.md     # un skill = un dossier
 skills/application-tracker/assets/tracker.py
 skills/ats-cv-tailor/assets/render_cv.py, ATS-RULES.md
+skills/cover-letter-writer/assets/render_letter.py
 agents/job-hunt-batch.md
 templates/profil-maitre.template.md
 install.ps1
