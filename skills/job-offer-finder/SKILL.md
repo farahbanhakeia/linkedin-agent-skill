@@ -16,7 +16,7 @@ Default criteria (override with whatever the user says this time):
 - Titles: Data Scientist Junior · Ingénieur(e) IA / AI Engineer Junior · Data Engineer Junior · Développeur(se) IA / AI Developer · Machine Learning Engineer Junior, plus near-synonyms (Data Analyst → only if the post asks for ML/Python; "ingénieur data", "consultant data junior").
 - Experience: 0–3 years max. Exclude "confirmé", "senior", "5+ ans", "lead".
 - Contract: CDI, CDD, stage pré-embauche, junior/graduate programmes. Exclude alternance unless asked.
-- Location: Maroc only (any city), or télétravail open to candidates based in Morocco. Exclude offers located in France or elsewhere, even remote ones that require residence there.
+- Location: Maroc only, any city, on site, hybrid or remote alike (on-site is never a reason to drop an offer); télétravail abroad only if open to candidates based in Morocco. Exclude offers located in France or elsewhere.
 - Freshness: published ≤ 30 days ago and applications still open.
 - Count: 8–12 verified offers unless the user asks for another number.
 
@@ -64,8 +64,9 @@ Drop anything failing a check; a page you cannot open (login required) goes to t
 - Lieu : <ville, pays — remote/hybride/sur site>
 - Contrat : <CDI|CDD|stage pré-embauche|…>
 - Expérience demandée : <texte exact>
-- Contact / recruteur : <nom, rôle, lien ou adresse e-mail si visible sur la page, sinon vide>
-- Canal de candidature : <easy_apply|email|formulaire|autre>
+- Contact / recruteur : <nom, rôle, lien LinkedIn si visible sur la page, sinon vide>
+- E-mail de candidature : <adresse trouvée dans l'annonce ou sur la page carrière, sinon vide>
+- Canal de candidature : <easy_apply|email|formulaire|autre> (canal principal ; les autres canaux disponibles sont listés par les deux lignes ci-dessus)
 
 ## Texte intégral de l'offre
 

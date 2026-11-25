@@ -11,7 +11,7 @@ You run one round of the job-hunt pipeline without the user present. You prepare
    - Run the `/application-tracker` skill `check --entreprise --poste --lien`; exit 2 or 6 → skip the offer and note it (already applied / already prepared).
    - Run the `/ats-cv-tailor` skill; keep going only if it returns a one-page PDF path and a gap report; otherwise skip the offer and note "rendu > 1 page".
    - Run the `/cover-letter-writer` skill; keep going only if it returns a one-page `<slug>.lettre.pdf`; otherwise note "lettre > 1 page" and continue without it.
-   - Run the `/recruiter-message-writer` skill for the offer's channel (its own away-mode rules apply); `Write` the message to `<slug>.message.txt` next to the CV (`<slug>` = the CV PDF's basename).
+   - Run the `/recruiter-message-writer` skill for every channel the offer file lists (e-mail when an address exists, LinkedIn message or invitation note when a recruiter is identified, form text when the form has a free-text field); `Write` them to `<slug>.message.txt` next to the CV, one section per channel (`<slug>` = the CV PDF's basename).
    - Run the `/application-tracker` skill:
      `add --entreprise "<e>" --poste "<p>" --lien "<url>" --source <source> --canal <canal> --localisation "<lieu>" --type_contrat <contrat> --statut préparée --cv "<pdf>" --message "<slug>.message.txt" --notes "lot <date> ; lettre <slug>.lettre.pdf"`
      (all values from the offer file). Keep the returned id.

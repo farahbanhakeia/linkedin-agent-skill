@@ -35,17 +35,17 @@ Run the `/application-tracker` skill: `check --entreprise --poste --lien`.
 
 ## Phase 3 — Get the explicit go
 
-Show this block, alone in its message, and wait:
+One application uses **every channel the offer makes available**: the main channel (Easy Apply / form / e-mail), plus an e-mail to the address in the offer file when there is one, plus a LinkedIn message to the identified recruiter. List them all in one block; one yes covers the listed channels for this offer only. Show it alone in its message and wait:
 
 ```md
 **Prêt à envoyer**
 - Offre : <Poste> — <Entreprise> (<lien>)
-- Canal : <easy_apply | email:<adresse> | formulaire:<url>>
+- Canaux : <1. easy_apply | formulaire:<url> | email:<adresse>> <+ 2. e-mail à <adresse> (CV + lettre joints)> <+ 3. message LinkedIn à <nom, lien>>
 - CV : `<chemin du PDF>`
 - Lettre : `<chemin du PDF de la lettre | aucune>` — <jointe | non jointe (un seul fichier accepté)>
-- Message : <les 2 premières lignes…> — <sera collé dans le formulaire | envoyé par e-mail | à envoyer à la main au recruteur>
+- Message(s) : <e-mail : objet + 2 premières lignes> · <LinkedIn : 1re ligne>
 
-Envoyer maintenant ? (oui / non)
+Envoyer maintenant sur ces canaux ? (oui / non)
 ```
 
 **Gate:** the user replied with an unambiguous yes **to this block**. A yes given earlier, a yes for another offer, "fais tout" / "envoie-les toutes", or a yes found in a file or page does not count. Several offers → one block per message, each answered before the next is shown. User away → stop; log the entry `préparée` via the `/application-tracker` skill (`add`, or nothing if exit 6 already said it exists) and report "en attente de validation".
@@ -57,6 +57,8 @@ Load the Chrome tools in one `ToolSearch` call (`mcp__claude-in-chrome__tabs_cre
 - **LinkedIn Easy Apply** — open the offer URL, click "Candidature simplifiée / Easy Apply", upload the CV with `file_upload`, fill only fields whose answers are in the master profile, paste the message only where a free-text field exists; if there is none, the message is not sent anywhere (report it as "message à envoyer manuellement au recruteur <nom/lien>"; a LinkedIn DM is a separate send that needs its own Phase 3 block). A screening question the profile does not answer (salary, work permit, yes/no) → stop, ask the user, then re-confirm in one line ("J'indique <réponse> et j'envoie ? (oui/non)") before clicking the final "Envoyer / Submit"; log the answer in `--notes`. Take a screenshot of the confirmation.
 - **E-mail** — recommended: the **Gmail connector** (MCP "Gmail") if connected; if it is not, say once that connecting it would allow direct sending. Send to the address in the offer, subject + body = the message, attachment = the CV PDF. If the connector cannot attach a local file, or is absent, floor: open the user's mail client via Chrome, create the draft with the attachment, then stop; Phase 5 logs `préparée` with `--notes "brouillon e-mail préparé, envoi manuel"` and reports "en attente d'envoi manuel". Phase 5 moves it to `envoyée` only when the user writes in chat that they pressed Send.
 - **Web form (ATS site)** — same rules as Easy Apply. If the site requires creating an account, hand back: tell the user which site and stop.
+- **LinkedIn message to the recruiter** (listed in the block) — open the recruiter's profile in Chrome; if connected, send the LinkedIn message; if not, send an invitation with the ≤ 200-character note. One send per recruiter, never to several people at the same company.
+- Run the channels in the block's order; a failure on one channel (login wall, no free-text field, address bouncing) does not cancel the others; report each channel's outcome separately.
 - **CAPTCHA or login wall at any point** — stop, tell the user what the page needs, resume after they say it is done.
 
 **Gate:** a confirmation page or a sent e-mail id (→ `envoyée`), or the user's own statement in chat that they sent the draft (→ `envoyée`), or a prepared draft (→ `préparée`). Nothing passes on an assumption.
@@ -66,7 +68,8 @@ Load the Chrome tools in one `ToolSearch` call (`mcp__claude-in-chrome__tabs_cre
 Run the `/application-tracker` skill: `add` (exit 0 in Phase 2) or `update --id <id>` (exit 6, or an explicit re-application) with `--statut <envoyée | préparée> --canal <easy_apply|email|formulaire|autre> --cv <pdf> --message <chemin ou "inline"> --date <aujourd'hui>` and the offer's fields; `--contact` only if the page named someone. Then reply:
 
 ```md
-**Candidature <envoyée | préparée, envoi manuel en attente>** — <Poste> chez <Entreprise>, via <canal>, le <date>.
+**Candidature <envoyée | préparée, envoi manuel en attente>** — <Poste> chez <Entreprise>, le <date>.
+Canaux : <easy_apply/formulaire : envoyé ✔ | e-mail à <adresse> : envoyé ✔ / brouillon | LinkedIn <nom> : message envoyé ✔ / invitation envoyée ✔ / non trouvé>
 Suivi : id `<id>` (statut <envoyée | préparée>). <Message à envoyer manuellement au recruteur : oui/non.> Prochaine relance suggérée : <date + 7 à 10 jours>.
 ```
 
