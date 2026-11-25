@@ -39,7 +39,7 @@ Classify every keyword:
 
 - **Match** — the profile has it (same or equivalent term) at any level. Note the evidence line and the profile's level (maîtrisé / pratiqué / notions).
 - **Partial** — the profile has a neighbour (offer wants Databricks, profile has Spark "notions"). Usable only phrased honestly: "connaissances", "notions".
-- **Missing** — nothing in the profile. Goes to the gap report; never on the CV.
+- **Missing** — nothing in the profile. Goes to the gap report; never on the CV. Exception: a keyword listed in the profile's "Compétences en cours d'apprentissage" section may appear once, with the offer's exact wording, as "notions" / "en cours d'apprentissage"; still counted as a gap in the report.
 
 ```md
 | Compétence demandée | Must/Nice | Statut | Preuve (ligne du profil) ou suggestion |
@@ -67,7 +67,9 @@ Write the JSON spec for `assets/render_cv.py` (schema in the script header; rule
 - `experiences`: all unflagged profile experiences, 2–3 bullets each, reordered and reworded so matched keywords appear, every bullet traceable to a profile line. Dates and durations exactly as in the profile.
 - `projets`: the 2–4 projects most relevant to the offer; metrics only those in the profile.
 - `formation`, `certifications`, `langues`: from the profile; skip flagged items the user has not confirmed.
+- `contact`: city, then the profile's availability and mobility in one short item ("Disponible immédiatement · mobile Maroc / France / télétravail") when the profile states them.
 - `lang`: `fr` or `en` to match the offer.
+- `photo`: the path from the profile's "Photo" line when the profile has one, except for an offer located in France that is applied to through an ATS form (Workday, Taleo, SmartRecruiters, Welcome to the Jungle…): then omit it, because some French parsers mishandle images and the photo is discouraged there. The user may override either way.
 
 Save the spec with `Write` to `~/Documents/candidature/cv/<slug>.json` where `<slug>` = `CV_<Nom>_<Entreprise>_<Poste>` (ASCII, underscores).
 

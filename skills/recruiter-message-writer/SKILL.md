@@ -19,7 +19,7 @@ Write in the offer's language (the user's language if the offer is bilingual); r
 | --- | --- | --- |
 | Note d'invitation LinkedIn | 200 characters (300 with Premium); free accounts get only a few personalised notes per month | ≤ 200 characters |
 | Message LinkedIn / InMail | subject 200 characters, body 1,900 characters | 60–120 words, excluding subject and signature |
-| E-mail de candidature | none | subject ≤ 70 characters; body 120–170 words, excluding subject and signature |
+| E-mail de candidature | none | subject ≤ 70 characters; body 150–220 words, excluding subject and signature: dense, every sentence carries a fact |
 | Relance (LinkedIn or e-mail, 7–10 days after sending) | as above | 50–80 words |
 
 If the `/ats-cv-tailor` skill already ran on this offer, reuse its matched keywords instead of re-deriving them.
@@ -28,7 +28,7 @@ If the `/ats-cv-tailor` skill already ran on this offer, reuse its matched keywo
 
 ## Phase 2 — Draft
 
-Structure, in order: who you are in one clause → why this offer (one specific element of the offer, not the company's homepage) → two proofs with the offer's own keywords → availability + interview ask → signature with phone and LinkedIn (e-mail only). The application verb is "je candidate" (this message is usually sent with or before the application), never "je viens de postuler" unless the user says it was already sent.
+Structure, in order: who you are in one clause → why this offer (one specific element of the offer, not the company's homepage) → two proofs with the offer's own keywords → motivation and curiosity shown by a fact, never asserted (a project done outside the curriculum, a skill learned alone, a result measured) → what you would do in the first months, tied to the offer's missions → availability and mobility from the profile + interview ask → signature with phone and LinkedIn (e-mail only). Tone: professional, direct, warm, no superlatives. The application verb is "je candidate" (this message is usually sent with or before the application), never "je viens de postuler" unless the user says it was already sent.
 
 Templates (`<Nom>`, `<Téléphone>`, `<LinkedIn>`, `<Diplôme>` from the profile):
 
@@ -57,11 +57,13 @@ Objet : Candidature <titre exact> – <Nom>
 
 Bonjour <Madame/Monsieur Nom | Madame, Monsieur>,
 
-<Pourquoi cette offre, 1 phrase précise.>
+<Pourquoi cette offre, 1 phrase précise sur une mission ou une exigence de l'annonce.>
 
-<Proof 1 — expérience ou projet du profil, avec le mot-clé de l'offre.> <Proof 2.> <Niveau honnête sur une compétence « en approfondissement » si elle est must-have.>
+<Proof 1 — expérience ou projet du profil, avec le mot-clé de l'offre, un chiffre ou un périmètre.> <Proof 2.> <Niveau honnête sur une compétence « notions / en cours » si elle est must-have.>
 
-Disponible <disponibilité>, je serais heureuse d'échanger lors d'un entretien. Vous trouverez mon CV ci-joint.
+<Motivation prouvée : le projet mené seule ou la compétence apprise en autonomie qui montre la curiosité, en lien avec le poste.> <Ce que je ferais dans les premiers mois, rattaché à une mission de l'annonce.>
+
+Disponible <disponibilité>, mobile <mobilité du profil>, je serais heureuse d'échanger lors d'un entretien. Vous trouverez mon CV et ma lettre de motivation ci-joints.
 
 Cordialement,
 <Nom> · <Téléphone> · <LinkedIn>

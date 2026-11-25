@@ -13,7 +13,7 @@ Reply in the user's language. Output folder: `~/Documents/candidature/offres/` (
 
 Default criteria (override with whatever the user says this time):
 
-- Titles: Data Scientist Junior · Ingénieur(e) IA / AI Engineer Junior · Data Engineer Junior, plus near-synonyms (Machine Learning Engineer junior, Data Analyst → only if the post asks for ML/Python).
+- Titles: Data Scientist Junior · Ingénieur(e) IA / AI Engineer Junior · Data Engineer Junior · Développeur(se) IA / AI Developer · Machine Learning Engineer Junior, plus near-synonyms (Data Analyst → only if the post asks for ML/Python; "ingénieur data", "consultant data junior").
 - Experience: 0–3 years max. Exclude "confirmé", "senior", "5+ ans", "lead".
 - Contract: CDI, CDD, stage pré-embauche, junior/graduate programmes. Exclude alternance unless asked.
 - Location: Maroc, France, or télétravail/remote (full remote or hybrid in those countries).

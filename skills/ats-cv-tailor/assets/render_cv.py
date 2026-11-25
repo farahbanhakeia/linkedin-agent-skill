@@ -15,7 +15,8 @@ Spec (all strings UTF-8; omit a section to skip it):
  "projets": [{"titre": "…", "stack": "Python, PyTorch", "points": ["…"]}],
  "formation": [{"titre": "…", "org": "…", "dates": "2024 – 2026"}],
  "certifications": ["…"], "langues": ["Français — C2", "…"],
- "lang": "fr"   // section headings in fr or en
+ "lang": "fr",   // section headings in fr or en
+ "photo": "C:/Users/<user>/Documents/candidature/photo.jpg"   // optional; omitted or missing file = no photo
 }
 """
 import json, sys
@@ -54,6 +55,22 @@ def build(spec, out, scale):
     }
     L = HEAD.get(spec.get("lang", "fr"), HEAD["fr"])
     el = []
+
+    # Optional photo: drawn on the canvas at the top right; header text is indented so it never overlaps.
+    photo = spec.get("photo")
+    photo_box = None
+    if photo and Path(photo).expanduser().is_file():
+        from reportlab.lib.utils import ImageReader
+        img = ImageReader(str(Path(photo).expanduser()))
+        iw, ih = img.getSize()
+        pw = 26 * mm
+        ph = pw * ih / iw
+        if ph > 34 * mm:
+            ph = 34 * mm
+            pw = ph * iw / ih
+        photo_box = (img, pw, ph)
+        for k in ("name", "title", "contact"):
+            st[k].rightIndent = pw + 5 * mm
 
     def section(key):
         el.append(Paragraph(L[key], st["h"]))
@@ -96,7 +113,14 @@ def build(spec, out, scale):
     doc = SimpleDocTemplate(str(out), pagesize=A4, leftMargin=16 * mm, rightMargin=16 * mm,
                             topMargin=13 * mm, bottomMargin=13 * mm,
                             title=f"CV {spec['nom']} — {spec['titre']}", author=spec["nom"], subject=spec["titre"])
-    doc.build(el)
+
+    def draw_photo(canvas, d):
+        if photo_box:
+            img, pw, ph = photo_box
+            canvas.drawImage(img, A4[0] - 16 * mm - pw, A4[1] - 13 * mm - ph,
+                             width=pw, height=ph, preserveAspectRatio=True, mask="auto")
+
+    doc.build(el, onFirstPage=draw_photo)
 
 
 def main():
