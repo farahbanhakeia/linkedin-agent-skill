@@ -39,7 +39,7 @@ Classify every keyword:
 
 - **Match** — the profile has it (same or equivalent term) at any level. Note the evidence line and the profile's level (maîtrisé / pratiqué / notions).
 - **Partial** — the profile has a neighbour (offer wants Databricks, profile has Spark "notions"). Usable only phrased honestly: "connaissances", "notions".
-- **Missing** — nothing in the profile. Goes to the gap report; never on the CV. Exception: a keyword listed in the profile's "Compétences en cours d'apprentissage" section may appear once, with the offer's exact wording, as "notions" / "en cours d'apprentissage"; still counted as a gap in the report.
+- **Missing** — nothing in the profile. Goes to the gap report **and** to the CV's last skills line « Montée en compétence en cours : … » (EN: « Currently learning: … ») with the offer's exact wording, so that 100 % of the offer's must-have keywords are present on the CV (Farah's instruction, 2026-11-25). Never phrased as mastered, practised, or experienced; never inside an experience bullet; never a certification or a diploma.
 
 ```md
 | Compétence demandée | Must/Nice | Statut | Preuve (ligne du profil) ou suggestion |
@@ -63,7 +63,7 @@ Write the JSON spec for `assets/render_cv.py` (schema in the script header; rule
 
 - `titre`: the offer's job title (or its closest honest variant) + 2–3 matched hard skills.
 - `resume`: 3–4 lines, written for this offer, containing the top 5 matched must-haves verbatim.
-- `competences`: 4–6 categories ordered by the offer's priorities; matched keywords first, in the offer's wording; levels only where the profile sets them below "maîtrisé".
+- `competences`: 4–6 categories ordered by the offer's priorities; matched keywords first, in the offer's wording; levels only where the profile sets them below "maîtrisé"; last category « Montée en compétence en cours » listing every Missing must-have (and Missing nice-to-have when space allows) verbatim.
 - `experiences`: all unflagged profile experiences, 2–3 bullets each, reordered and reworded so matched keywords appear, every bullet traceable to a profile line. Dates and durations exactly as in the profile.
 - `projets`: the 2–4 projects most relevant to the offer; metrics only those in the profile.
 - `formation`, `certifications`, `langues`: from the profile; skip flagged items the user has not confirmed.
@@ -73,7 +73,7 @@ Write the JSON spec for `assets/render_cv.py` (schema in the script header; rule
 
 Save the spec with `Write` to `~/Documents/candidature/cv/<slug>.json` where `<slug>` = `CV_<Nom>_<Entreprise>_<Poste>` (ASCII, underscores).
 
-**Gate:** a reviewer could trace every CV line to a profile line; every matched must-have appears at least once in the CV text; no flagged fact is used without confirmation.
+**Gate:** a reviewer could trace every CV line to a profile line, except the « Montée en compétence en cours » line; **every must-have keyword of the offer appears at least once in the CV text** (matched ones in context, missing ones in that line); no flagged fact is used without confirmation.
 
 ## Phase 5 — Render and fit to one page
 
@@ -106,7 +106,7 @@ Reply with this block, then offer the next step (run the `/recruiter-message-wri
 
 ## Anti-patterns
 
-- **Keyword stuffing.** A skills line that lists every offer keyword, matched or not. Only matched ones, in context.
+- **Keyword laundering.** Putting a missing tool inside an experience bullet or a mastered-skills line. Missing keywords live only in « Montée en compétence en cours ».
 - **Mirroring the offer's seniority.** "3 ans d'expérience" on the CV because the offer asks for it. Durations come from the profile only.
 - **Two columns, icons, tables, photos.** They break ATS parsing. Do not post-process the PDF.
 - **Editing the PDF text by hand.** Change the JSON spec and re-render.

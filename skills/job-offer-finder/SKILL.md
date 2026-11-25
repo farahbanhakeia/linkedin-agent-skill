@@ -17,7 +17,7 @@ Default criteria (override with whatever the user says this time):
 - Experience: 0–3 years max. Exclude "confirmé", "senior", "5+ ans", "lead".
 - Contract: CDI, CDD, stage pré-embauche, junior/graduate programmes. Exclude alternance unless asked.
 - Location: Maroc only, any city, on site, hybrid or remote alike (on-site is never a reason to drop an offer); télétravail abroad only if open to candidates based in Morocco. Exclude offers located in France or elsewhere.
-- Freshness: published ≤ 30 days ago and applications still open.
+- Freshness: published ≤ 3 days ago (hard limit 7 days; anything older is dropped even if still open). Prefer the newest.
 - Count: 8–12 verified offers unless the user asks for another number.
 
 `Read` `~/Documents/candidature/profil-maitre.md` if it exists: "Cibles de recherche" may refine titles or zones (ignore its `⚠️ À CONFIRMER` lines), and "Compétences" feeds the ranking in Phase 5. Missing file → defaults above, ranking on title and freshness only.
@@ -32,12 +32,15 @@ Run the `/application-tracker` skill (`list --json`) and keep every `entreprise`
 
 ## Phase 3 — Search broadly
 
-Run the sources in parallel where possible:
+LinkedIn comes first (Farah's instruction): job posts and recruiters' feed posts (« recrute », « urgent », #hiring). Then the other sources.
 
 1. **Indeed connector** (MCP "Indeed", its job-search tools), soft dependency: if connected, query each title × each location; if not, skip it and tell the user once that connecting the Indeed connector would add a source.
 2. **`WebSearch`** (mode "standard", French and English), one query per title × zone, with site filters rotated across:
    `linkedin.com/jobs`, `ma.indeed.com`, `rekrute.com`, `emploi.ma`, `marocannonces.com`, `dreamjob.ma`, `jobs.lever.co`, `boards.greenhouse.io`, `welcometothejungle.com` (Moroccan offices only). Example: `"data scientist" junior CDI Casablanca site:rekrute.com`.
-3. **LinkedIn Jobs via Claude in Chrome**, soft dependency (load `mcp__claude-in-chrome__tabs_create_mcp`, `navigate`, `get_page_text`, `read_page` with one `ToolSearch` call). Open `https://www.linkedin.com/jobs/search/?keywords=<title>&location=Maroc&f_TPR=r2592000&f_E=1,2,3` (also try `location=Casablanca` and `location=Rabat`) (last 30 days = 2 592 000 s; experience codes 1 internship, 2 entry level, 3 associate) in a new tab; read the results list, never click Apply. Login wall or CAPTCHA → stop that source and tell the user; never solve it. Chrome not connected → keep the LinkedIn URLs found by `WebSearch` and verify them with `WebFetch` on the public job view in Phase 4.
+3. **LinkedIn** (first source), in a browser where the user is signed in: Claude in Chrome if connected, else the built-in browser pane (`mcp__Claude_Browser__*`, same persistent sign-in). Never type the user's password; if LinkedIn asks to sign in, open `https://www.linkedin.com/login` in the pane and ask the user to sign in there, then continue.
+   - Jobs: `https://www.linkedin.com/jobs/search/?keywords=<title>&location=Maroc&f_TPR=r259200&f_E=1,2,3&sortBy=DD` (`f_TPR=r259200` = last 3 days; also `location=Casablanca`, `Rabat`); read the list, open each job, never click Apply here.
+   - Recruiter posts: `https://www.linkedin.com/search/results/content/?keywords=<"data scientist" OR "data engineer" OR "ingénieur IA"> recrute Maroc&datePosted="past-24h"` then `"past-week"`; a post counts as an offer when it names a role, a company or recruiter, a location in Morocco, and a way to apply (link, e-mail, « envoyez votre CV », DM). Save it as an offer file with `Canal de candidature : email` or `autre` (DM) and the recruiter line filled.
+   - CAPTCHA or checkpoint → stop that source and tell the user; never solve it.
 
 Collect candidates as `{title, company, location, url, source, posted}`. Dedupe: same URL once query string and `www.` are stripped, or same company + title ignoring case, accents, and "H/F / junior / CDI" tokens; drop anything matching the Phase 2 list by the same rule.
 
@@ -48,7 +51,7 @@ Collect candidates as `{title, company, location, url, source, posted}`. Dedupe:
 For each candidate, fetch the offer page (`WebFetch` / the `web-fetch` agent, or `get_page_text` in Chrome for LinkedIn) and check, in order:
 
 - [ ] Still open (no "offre expirée / no longer accepting applications").
-- [ ] Posted ≤ 30 days ago (use the page's date; if absent, the search engine's snippet date; if neither, mark `date ?`).
+- [ ] Posted ≤ 3 days ago (page date, LinkedIn « il y a X heures/jours », or the post's timestamp); 4–7 days only if nothing fresher exists and the user is told; > 7 days → drop. No date at all → drop.
 - [ ] Experience required ≤ 3 years, or "junior / débutant / jeune diplômé".
 - [ ] Contract type and location match the criteria.
 - [ ] Not already in the pipeline: run the `/application-tracker` skill `check --entreprise --poste --lien`; exit 2 → drop (déjà postulé), exit 6 → drop (déjà préparée); the ledger's normalisation is authoritative, not your eye.
@@ -86,7 +89,7 @@ Rank by fit (title match, overlap between the offer's stack and the profile's "C
 |---|---|---|---|---|---|---|---|---|---|
 | 1 | … | … | … | … | … | … | … | … | offres/… |
 
-Examinées : N · Retenues : n · Écartées : expirée x / senior y / déjà postulé z / déjà préparée p / hors zone w / autre v
+Examinées : N · Retenues : n · Écartées : trop ancienne (> 3 j) a / expirée x / senior y / déjà postulé z / déjà préparée p / hors zone w / autre v
 Non vérifiables (login requis) : <liens ou "aucun">
 ```
 

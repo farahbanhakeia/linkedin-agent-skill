@@ -35,6 +35,8 @@ Run the `/application-tracker` skill: `check --entreprise --poste --lien`.
 
 ## Phase 3 — Get the explicit go
 
+**Standing approval.** When the user has, in this conversation or in the master profile's « Autorisation d'envoi » line, explicitly authorised sending every application that fits a defined scope (zone, roles, freshness, their real profile), skip the block below for offers inside that scope: post a one-line « Envoi en cours : <Poste> — <Entreprise> — <canaux> » and go to Phase 4. Anything outside the scope, any screening question the profile cannot answer, and anything the rules below reserve to the user (CAPTCHA / bot checks, account passwords, e-mail verification codes or links) still stop and ask.
+
 One application uses **every channel the offer makes available**: the main channel (Easy Apply / form / e-mail), plus an e-mail to the address in the offer file when there is one, plus a LinkedIn message to the identified recruiter. List them all in one block; one yes covers the listed channels for this offer only. Show it alone in its message and wait:
 
 ```md
