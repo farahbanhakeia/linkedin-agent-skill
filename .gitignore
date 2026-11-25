@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+*.pdf
+*.tmp
+# données personnelles : jamais dans le dépôt
+candidature/
+profil-maitre.md
+suivi-candidatures.csv
