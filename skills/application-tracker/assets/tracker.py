@@ -34,9 +34,21 @@ def norm(s: str) -> str:
     return re.sub(r"[^a-z0-9]+", " ", s).strip()
 
 
+TRACKING_PARAMS = ("utm_", "trk", "ref", "refid", "trackingid", "source", "from", "origin", "fbclid", "gclid", "feedid", "tcsource", "r", "hl")
+
+
 def norm_url(u: str) -> str:
-    u = (u or "").strip().lower().split("?")[0].split("#")[0].rstrip("/")
-    return re.sub(r"^https?://(www\.)?", "", u)
+    """Lowercase, drop scheme/www/fragment/trailing slash and tracking params; keep identifying params (jk, id, currentJobId…)."""
+    u = (u or "").strip().lower().split("#")[0]
+    u = re.sub(r"^https?://(www\.|m\.)?", "", u)
+    path, _, query = u.partition("?")
+    path = path.rstrip("/").replace("/m/viewjob", "/viewjob")
+    keep = []
+    for part in query.split("&") if query else []:
+        k = part.split("=")[0]
+        if k and not any(k == t or k.startswith(t) for t in TRACKING_PARAMS):
+            keep.append(part)
+    return path + ("?" + "&".join(sorted(keep)) if keep else "")
 
 
 def load():
