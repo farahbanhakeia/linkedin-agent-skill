@@ -13,7 +13,7 @@ Reply in the user's language. Output folder: `~/Documents/candidature/offres/` (
 
 Default criteria (override with whatever the user says this time):
 
-- Titles: Data Scientist Junior · Ingénieur(e) IA / AI Engineer Junior · Data Engineer Junior · Développeur(se) IA / AI Developer · Machine Learning Engineer Junior, plus near-synonyms (Data Analyst → only if the post asks for ML/Python; "ingénieur data", "consultant data junior").
+- Titles: Data Scientist Junior · Ingénieur(e) IA / AI Engineer Junior · Data Engineer Junior · Développeur(se) IA / AI Developer · Machine Learning Engineer Junior · Data Analyst · Développeur(se) web / full stack (Angular, React, Node.js, Spring Boot) · Développeur(se) web & IA, plus near-synonyms ("ingénieur data", "consultant data junior", "ingénieur logiciel junior").
 - Experience: 0–3 years max. Exclude "confirmé", "senior", "5+ ans", "lead".
 - Contract: CDI, CDD, stage pré-embauche, junior/graduate programmes. Exclude alternance unless asked.
 - Location: Maroc only, any city, on site, hybrid or remote alike (on-site is never a reason to drop an offer); télétravail abroad only if open to candidates based in Morocco. Exclude offers located in France or elsewhere.
@@ -34,7 +34,7 @@ Run the `/application-tracker` skill (`list --json`) and keep every `entreprise`
 
 LinkedIn comes first (Farah's instruction): job posts and recruiters' feed posts (« recrute », « urgent », #hiring). Then the other sources.
 
-1. **Indeed connector** (MCP "Indeed", its job-search tools), soft dependency: if connected, query each title × each location; if not, skip it and tell the user once that connecting the Indeed connector would add a source.
+1. **Indeed connector** (MCP "Indeed", its job-search tools), second source after LinkedIn: query each title × Maroc / Casablanca / Rabat, keep postings ≤ 3 days, open each with its details tool; not connected → skip and say so once.
 2. **`WebSearch`** (mode "standard", French and English), one query per title × zone, with site filters rotated across:
    `linkedin.com/jobs`, `ma.indeed.com`, `rekrute.com`, `emploi.ma`, `marocannonces.com`, `dreamjob.ma`, `jobs.lever.co`, `boards.greenhouse.io`, `welcometothejungle.com` (Moroccan offices only). Example: `"data scientist" junior CDI Casablanca site:rekrute.com`.
 3. **LinkedIn** (first source), in a browser where the user is signed in: Claude in Chrome if connected, else the built-in browser pane (`mcp__Claude_Browser__*`, same persistent sign-in). Never type the user's password; if LinkedIn asks to sign in, open `https://www.linkedin.com/login` in the pane and ask the user to sign in there, then continue.
