@@ -8,7 +8,7 @@ Tout ce que les skills écrivent (CV, messages, profil) vient d'un seul fichier 
 
 | Skill | Ce qu'il fait | Exemples de déclencheurs |
 | --- | --- | --- |
-| `job-offer-finder` | Trouve des offres récentes et ouvertes (0–3 ans, CDI/CDD/stage pré-embauche, Maroc/France/télétravail), ouvre et vérifie chacune, exclut celles déjà dans le suivi, enregistre le texte dans `offres/` | « cherche des offres », « find junior data jobs » |
+| `job-offer-finder` | Trouve des offres récentes et ouvertes (0–3 ans, CDI/CDD/stage pré-embauche, Maroc ou télétravail depuis le Maroc), ouvre et vérifie chacune, exclut celles déjà dans le suivi, enregistre le texte dans `offres/` | « cherche des offres », « find junior data jobs » |
 | `ats-cv-tailor` | Génère un CV PDF d'une page, compatible ATS, adapté à une offre, avec un rapport des compétences manquantes | « adapte mon CV à cette offre » |
 | `cover-letter-writer` | Lettre de motivation d'une page en PDF : chaque paragraphe répond à une exigence de l'offre avec une preuve du profil | « lettre de motivation pour cette offre » |
 | `recruiter-message-writer` | Note d'invitation, message LinkedIn, e-mail de candidature ou relance, deux preuves concrètes puis la demande d'entretien | « écris un message au recruteur » |

@@ -28,9 +28,9 @@ Body = 4 paragraphs, 220–320 words in total, in this order:
 
 ```json
 {
- "expediteur": ["<Nom>", "<Ville, Pays>", "<Téléphone>", "<E-mail>", "<LinkedIn>"],
- "destinataire": ["<Entreprise>", "<Nom du recruteur ou Service recrutement>", "<Ville>"],
- "lieu_date": "<Ville>, le <jour mois année>",
+ "expediteur": ["<Nom>", "<Ville de l'offre, Pays — ou la ville par défaut du profil si l'offre n'en donne pas>", "<Téléphone>", "<E-mail>", "<LinkedIn>"],
+ "destinataire": ["<Entreprise>", "<Nom du recruteur ou Service recrutement>", "<Ville de l'offre>"],
+ "lieu_date": "<même ville que l'expéditeur>, le <jour mois année>",
  "objet": "Candidature au poste de <titre exact>",
  "salutation": "<Madame X, | Monsieur X, | Madame, Monsieur,>",
  "paragraphes": ["<accroche>", "<preuve 1>", "<preuve 2 + honnêteté>", "<apport + demande>"],

@@ -1,6 +1,6 @@
 ---
 name: job-hunt-batch
-description: Run one unattended job-hunt round for junior Data Scientist / AI Engineer / Data Engineer roles — find and verify fresh offers, prepare a tailored one-page CV and recruiter message for each, log them as "préparée", and stop before sending. Launch when the user says "lance une session de candidatures", "prépare-moi un lot d'offres", "run a job-hunt batch", or wants applications prepared while they are away.
+description: Run one unattended job-hunt round for junior Data Scientist / AI Engineer / Data Engineer roles in Morocco — find and verify fresh offers, prepare a tailored one-page CV and recruiter message for each, log them as "préparée", and stop before sending. Launch when the user says "lance une session de candidatures", "prépare-moi un lot d'offres", "run a job-hunt batch", or wants applications prepared while they are away.
 ---
 
 You run one round of the job-hunt pipeline without the user present. You prepare; you never send: do not run the `/submit-application` skill, do not click Apply, do not send e-mails or LinkedIn messages. Work in the user's language (French by default).

@@ -1,6 +1,6 @@
 ---
 name: job-offer-finder
-description: Find recent, still-open junior Data Scientist / AI Engineer / Data Engineer job offers (0–3 ans, CDI/CDD/stage pré-embauche, Maroc/France/télétravail), verify each one, exclude offers already applied to, and save them as offer files for the CV tailor. Use when the user says "cherche des offres", "trouve-moi des postes", "recherche d'emploi", "offres data junior", "find junior data jobs", "job search", "nouvelles offres", "veille d'offres", or "lance la veille emploi".
+description: Find recent, still-open junior Data Scientist / AI Engineer / Data Engineer job offers (0–3 ans, CDI/CDD/stage pré-embauche, Maroc or télétravail depuis le Maroc), verify each one, exclude offers already applied to, and save them as offer files for the CV tailor. Use when the user says "cherche des offres", "trouve-moi des postes", "recherche d'emploi", "offres data junior", "find junior data jobs", "job search", "nouvelles offres", "veille d'offres", or "lance la veille emploi".
 ---
 
 # Job Offer Finder
@@ -16,7 +16,7 @@ Default criteria (override with whatever the user says this time):
 - Titles: Data Scientist Junior · Ingénieur(e) IA / AI Engineer Junior · Data Engineer Junior · Développeur(se) IA / AI Developer · Machine Learning Engineer Junior, plus near-synonyms (Data Analyst → only if the post asks for ML/Python; "ingénieur data", "consultant data junior").
 - Experience: 0–3 years max. Exclude "confirmé", "senior", "5+ ans", "lead".
 - Contract: CDI, CDD, stage pré-embauche, junior/graduate programmes. Exclude alternance unless asked.
-- Location: Maroc, France, or télétravail/remote (full remote or hybrid in those countries).
+- Location: Maroc only (any city), or télétravail open to candidates based in Morocco. Exclude offers located in France or elsewhere, even remote ones that require residence there.
 - Freshness: published ≤ 30 days ago and applications still open.
 - Count: 8–12 verified offers unless the user asks for another number.
 
@@ -36,8 +36,8 @@ Run the sources in parallel where possible:
 
 1. **Indeed connector** (MCP "Indeed", its job-search tools), soft dependency: if connected, query each title × each location; if not, skip it and tell the user once that connecting the Indeed connector would add a source.
 2. **`WebSearch`** (mode "standard", French and English), one query per title × zone, with site filters rotated across:
-   `linkedin.com/jobs`, `welcometothejungle.com`, `fr.indeed.com`, `ma.indeed.com`, `rekrute.com`, `emploi.ma`, `hellowork.com`, `apec.fr`, `jobs.lever.co`, `boards.greenhouse.io`. Example: `"data scientist" junior CDI Paris site:welcometothejungle.com`.
-3. **LinkedIn Jobs via Claude in Chrome**, soft dependency (load `mcp__claude-in-chrome__tabs_create_mcp`, `navigate`, `get_page_text`, `read_page` with one `ToolSearch` call). Open `https://www.linkedin.com/jobs/search/?keywords=<title>&location=<zone>&f_TPR=r2592000&f_E=1,2,3` (last 30 days = 2 592 000 s; experience codes 1 internship, 2 entry level, 3 associate) in a new tab; read the results list, never click Apply. Login wall or CAPTCHA → stop that source and tell the user; never solve it. Chrome not connected → keep the LinkedIn URLs found by `WebSearch` and verify them with `WebFetch` on the public job view in Phase 4.
+   `linkedin.com/jobs`, `ma.indeed.com`, `rekrute.com`, `emploi.ma`, `marocannonces.com`, `dreamjob.ma`, `jobs.lever.co`, `boards.greenhouse.io`, `welcometothejungle.com` (Moroccan offices only). Example: `"data scientist" junior CDI Casablanca site:rekrute.com`.
+3. **LinkedIn Jobs via Claude in Chrome**, soft dependency (load `mcp__claude-in-chrome__tabs_create_mcp`, `navigate`, `get_page_text`, `read_page` with one `ToolSearch` call). Open `https://www.linkedin.com/jobs/search/?keywords=<title>&location=Maroc&f_TPR=r2592000&f_E=1,2,3` (also try `location=Casablanca` and `location=Rabat`) (last 30 days = 2 592 000 s; experience codes 1 internship, 2 entry level, 3 associate) in a new tab; read the results list, never click Apply. Login wall or CAPTCHA → stop that source and tell the user; never solve it. Chrome not connected → keep the LinkedIn URLs found by `WebSearch` and verify them with `WebFetch` on the public job view in Phase 4.
 
 Collect candidates as `{title, company, location, url, source, posted}`. Dedupe: same URL once query string and `www.` are stripped, or same company + title ignoring case, accents, and "H/F / junior / CDI" tokens; drop anything matching the Phase 2 list by the same rule.
 

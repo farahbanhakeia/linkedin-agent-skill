@@ -28,7 +28,7 @@ If the `/ats-cv-tailor` skill already ran on this offer, reuse its matched keywo
 
 ## Phase 2 — Draft
 
-Structure, in order: who you are in one clause → why this offer (one specific element of the offer, not the company's homepage) → two proofs with the offer's own keywords → motivation and curiosity shown by a fact, never asserted (a project done outside the curriculum, a skill learned alone, a result measured) → what you would do in the first months, tied to the offer's missions → availability and mobility from the profile + interview ask → signature with phone and LinkedIn (e-mail only). Tone: professional, direct, warm, no superlatives. The application verb is "je candidate" (this message is usually sent with or before the application), never "je viens de postuler" unless the user says it was already sent.
+Structure, in order: who you are in one clause → why this offer (one specific element of the offer, not the company's homepage) → two proofs with the offer's own keywords → motivation and curiosity shown by a fact, never asserted (a project done outside the curriculum, a skill learned alone, a result measured) → what you would do in the first months, tied to the offer's missions → availability (and the offer's city, never a list of regions) + interview ask → signature with phone and LinkedIn (e-mail only). Tone: professional, direct, warm, no superlatives. The application verb is "je candidate" (this message is usually sent with or before the application), never "je viens de postuler" unless the user says it was already sent.
 
 Templates (`<Nom>`, `<Téléphone>`, `<LinkedIn>`, `<Diplôme>` from the profile):
 
@@ -63,7 +63,7 @@ Bonjour <Madame/Monsieur Nom | Madame, Monsieur>,
 
 <Motivation prouvée : le projet mené seule ou la compétence apprise en autonomie qui montre la curiosité, en lien avec le poste.> <Ce que je ferais dans les premiers mois, rattaché à une mission de l'annonce.>
 
-Disponible <disponibilité>, mobile <mobilité du profil>, je serais heureuse d'échanger lors d'un entretien. Vous trouverez mon CV et ma lettre de motivation ci-joints.
+Disponible <disponibilité> <à/sur <ville de l'offre> si l'annonce en donne une>, je serais heureuse d'échanger lors d'un entretien. Vous trouverez mon CV et ma lettre de motivation ci-joints.
 
 Cordialement,
 <Nom> · <Téléphone> · <LinkedIn>
