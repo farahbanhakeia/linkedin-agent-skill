@@ -79,6 +79,13 @@ def build(spec, out, scale):
     el.append(Paragraph(esc(spec["nom"]), st["name"]))
     el.append(Paragraph(esc(spec["titre"]), st["title"]))
     el.append(Paragraph(esc("  |  ".join(spec.get("contact", []))), st["contact"]))
+    if photo_box:
+        # Keep the body clear of the photo: if the header is shorter than the photo, pad the difference.
+        avail_w = A4[0] - 32 * mm
+        header_h = sum(p.wrap(avail_w, 10000)[1] for p in el) + st["name"].spaceAfter
+        gap = photo_box[2] - header_h
+        if gap > 0:
+            el.append(Spacer(1, gap + 1.5 * mm))
 
     if spec.get("resume"):
         section("resume"); el.append(Paragraph(esc(spec["resume"]), st["body"]))
